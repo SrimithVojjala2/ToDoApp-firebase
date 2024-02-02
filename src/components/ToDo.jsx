@@ -8,11 +8,6 @@ import {
   TableCell,
   Button,
   Checkbox,
-  Dialog,
-  DialogContent,
-  DialogActions,
-  DialogContentText,
-  TextField,
   Typography,
 } from "@mui/material";
 import PushPinIcon from "@mui/icons-material/PushPin";
@@ -22,8 +17,10 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import MarkunreadIcon from "@mui/icons-material/Markunread";
 import MarkAsUnreadOutlinedIcon from "@mui/icons-material/MarkAsUnreadOutlined";
 import { useDispatch } from "react-redux";
-import { EditValue, updateCheckBox } from "../redux/CRUD/EditValue";
-import { DeleteToDo } from "../redux/CRUD/DeleteToDo";
+import { updateCheckBox } from "../redux/CRUD/EditValue";
+import DeleteDialog from "./DeleteDialog";
+import EditDialog from "./EditDialog";
+import EditProgress from "./EditProgress";
 
 function ToDo({ row, index }) {
   const [markAsRead, setmarkAsRead] = useState(false);
@@ -31,6 +28,7 @@ function ToDo({ row, index }) {
   const [openEditDialog, setopenEditDialog] = useState(false);
   const [updateEditvalue, setupdateEditvalue] = useState("");
   const [hoverPin, sethoverPin] = useState(false);
+  const [progressDialog, setprogressDialog] = useState(false);
   const [pinValue, setpinValue] = useState(false);
   const dispatch = useDispatch();
   const [checked, setChecked] = useState(false);
@@ -38,6 +36,21 @@ function ToDo({ row, index }) {
     setupdateEditvalue(row.description);
     setChecked(row.completed);
   }, [row]);
+
+  const activeProgress = () => {
+    if(row.progress === 'Completed'){
+      return 'green'
+    }
+    if(row.progress === 'Not yet'){
+      return 'dimgrey'
+    }
+    if(row.progress === 'Ongoing'){
+      return 'red'
+    }
+  }
+
+
+
 
   return (
     <>
@@ -62,7 +75,7 @@ function ToDo({ row, index }) {
                   setChecked((prev) => {
                     const newChecked = !prev;
                     updateCheckBox(row.id, newChecked);
-                    return newChecked
+                    return newChecked;
                   });
                 }}
                 style={{
@@ -117,6 +130,7 @@ function ToDo({ row, index }) {
                 }}
               />
             </TableCell>
+
             <TableCell
               style={{
                 paddingLeft: "15px",
@@ -125,13 +139,20 @@ function ToDo({ row, index }) {
             >
               <Typography variant="body1">{row.description}</Typography>
             </TableCell>
+
             <TableCell
               align="center"
               width={"50px"}
-              style={{ textDecoration: markAsRead ? "line-through" : "none" }}
+              style={{ textDecoration: markAsRead ? "line-through" : "none"}}
             >
-              <Typography variant="body1">{row.progress}</Typography>
+              <Button fullWidth onClick={() => setprogressDialog(true)} 
+                style={{ color: activeProgress()}}
+                
+              >
+                {row.progress}
+              </Button>
             </TableCell>
+
             <TableCell align="center" width={"200px"}>
               <Button
                 style={{ color: "steelblue" }}
@@ -146,79 +167,27 @@ function ToDo({ row, index }) {
                 <DeleteIcon />
               </Button>
 
-              <div className="Delete-Dialog">
-                <Dialog
-                  open={openDeleteDialog}
-                  onClose={() => setopenDeleteDialog(false)}
-                >
-                  <DialogContent>
-                    <DialogContentText>
-                      Are you sure want to Delete?
-                    </DialogContentText>
-                  </DialogContent>
-                  <DialogActions>
-                    <Button
-                      variant="contained"
-                      style={{ backgroundColor: "steelblue" }}
-                      onClick={() => setopenDeleteDialog(false)}
-                    >
-                      Cancel
-                    </Button>
-                    <Button
-                      variant="contained"
-                      style={{ backgroundColor: "steelblue" }}
-                      onClick={() => {
-                        DeleteToDo(row.id);
-                        setopenDeleteDialog(false);
-                      }}
-                    >
-                      Delete
-                    </Button>
-                  </DialogActions>
-                </Dialog>
-              </div>
+              <DeleteDialog
+                openDeleteDialog={openDeleteDialog}
+                setopenDeleteDialog={setopenDeleteDialog}
+                id={row.id}
+              />
 
-              <div className="Edit-Dialog">
-                <Dialog
-                  open={openEditDialog}
-                  onClose={() => setopenEditDialog(false)}
-                >
-                  <DialogContent>
-                    <DialogContentText>Edit the Task Details</DialogContentText>
-                    <TextField
-                      autoFocus
-                      required
-                      margin="dense"
-                      id="editValue"
-                      type="text"
-                      value={updateEditvalue}
-                      style={{ width: "400px" }}
-                      variant="standard"
-                      onChange={(e) => setupdateEditvalue(e.target.value)}
-                    />
-                  </DialogContent>
-                  <DialogActions>
-                    <Button
-                      variant="contained"
-                      style={{ backgroundColor: "steelblue" }}
-                      onClick={() => setopenEditDialog(false)}
-                    >
-                      Cancel
-                    </Button>
-                    <Button
-                      variant="contained"
-                      style={{ backgroundColor: "steelblue" }}
-                      onClick={() => {
-                        EditValue(row.id, updateEditvalue);
-                        setupdateEditvalue("");
-                        setopenEditDialog(false);
-                      }}
-                    >
-                      Update
-                    </Button>
-                  </DialogActions>
-                </Dialog>
-              </div>
+              <EditDialog
+                openEditDialog={openEditDialog}
+                setopenEditDialog={setopenEditDialog}
+                id={row.id}
+                updateEditvalue={updateEditvalue}
+                setupdateEditvalue={setupdateEditvalue}
+              />
+
+              <EditProgress 
+                progressDialog={progressDialog}
+                setprogressDialog ={setprogressDialog}
+                id ={row.id}
+                progressValue={row.progress}
+              />
+
             </TableCell>
             <TableCell align="center" width={"150px"}>
               <Checkbox

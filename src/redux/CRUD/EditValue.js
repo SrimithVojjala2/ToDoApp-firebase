@@ -15,6 +15,22 @@ export const EditValue = async (id, updateEditvalue) => {
   }
 };
 
+export const updateProgress = async (id, updateValue) => {
+  const ToDoListDataRef = collection(db, "ToDoData");
+  const ToDOListUserDataRef = collection(
+    doc(ToDoListDataRef, Auth.currentUser.uid),
+    "ToDos"
+  );
+  const updateToDo = doc(ToDOListUserDataRef, id);
+  try{
+  await updateDoc(updateToDo, { progress: updateValue });
+  }catch(err){
+    console.error(err.message);
+  }
+};
+
+
+
 export const updateCheckBox = async (id, value) => {
   const ToDoListDataRef = collection(db, "ToDoData");
   const ToDOListUserDataRef = collection(

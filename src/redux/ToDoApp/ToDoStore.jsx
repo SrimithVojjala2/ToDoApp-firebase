@@ -31,8 +31,13 @@ const ToDo = createSlice({
         state.ToDos = updatedTodos;
       }
     },
-    handleallselectvalue: (state) =>{
-      state.allselectvalue = !state.allselectvalue
+    handleallselectvalue: (state,actions) =>{
+      if(actions.payload !== false){
+        state.allselectvalue = !state.allselectvalue
+      }
+      else{
+        state.allselectvalue = actions.payload
+      }
     }
   },
 });

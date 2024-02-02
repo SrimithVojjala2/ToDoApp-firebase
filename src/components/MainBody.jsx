@@ -88,7 +88,7 @@ const MainBody = () => {
                 </TableCell>
                 <TableCell
                   style={{ color: "white" }}
-                  align="right"
+                  align="center"
                   width={"50px"}
                 >
                   Progress

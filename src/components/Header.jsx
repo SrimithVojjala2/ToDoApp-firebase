@@ -3,9 +3,13 @@ import { signOut } from "firebase/auth";
 import { Auth } from "../config/firebase";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import {setToDos,handleallselectvalue} from '../redux/ToDoApp/ToDoStore'
+
+
 const Header = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
   const [anchorEl, setAnchorEl] = useState(null);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -13,7 +17,11 @@ const Header = () => {
 
   const Logout = async () => {
     try {
-      await signOut(Auth).then(() => navigate("/signin"));
+      await signOut(Auth).then(() => {
+        dispatch(setToDos({data: []}))
+        dispatch(handleallselectvalue(false)) 
+        navigate("/signin")
+      });
     } catch (err) {
       alert(err.message);
     }
