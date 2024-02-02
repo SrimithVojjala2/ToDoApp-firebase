@@ -25,13 +25,13 @@ const MainBody = () => {
   const ToDos = useSelector(state => state.ToDoApp.ToDos);
   const allselectvalue = useSelector(state => state.ToDoApp.allselectvalue)
   const dispatch = useDispatch();
-  const ToDosCollectionRef = collection(db, "ToDoData");
-  const ToDoUserData = collection(
-    doc(ToDosCollectionRef, Auth.currentUser.uid),
-    "ToDos"
-  );
 
   useEffect(() => {
+    const ToDosCollectionRef = collection(db, "ToDoData");
+    const ToDoUserData = collection(
+      doc(ToDosCollectionRef, Auth.currentUser.uid),
+      "ToDos"
+    );
     const unsubscribe = onSnapshot(ToDoUserData, (querySnapshot) => {
       const newTodo = [];
       querySnapshot.forEach((doc) => {
@@ -49,7 +49,9 @@ const MainBody = () => {
 
   return (
     <>
-      <DragDropContext onDragEnd={(e) => dispatch(handleDragEnd(e))}>
+      <DragDropContext onDragEnd={(e) => {
+        dispatch(handleDragEnd(e),console.log(ToDos))
+        }}>
         <TableContainer component={Paper} style={{ marginTop: "20px" }}>
           <Table aria-label="simple table">
             <TableHead

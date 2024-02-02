@@ -147,7 +147,7 @@ function ToDo({ row, index }) {
             >
               <Button fullWidth onClick={() => setprogressDialog(true)} 
                 style={{ color: activeProgress()}}
-                
+
               >
                 {row.progress}
               </Button>
@@ -199,7 +199,7 @@ function ToDo({ row, index }) {
             </TableCell>
           </TableRow>
         )}
-      </Draggable>
+      </Draggable> 
     </>
   );
 }

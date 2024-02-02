@@ -49,8 +49,10 @@ function EditProgress({
             </Select>
           </Container>
         </DialogContent>
-        <DialogActions>
+        <DialogActions style={{marginTop: '20px'}}>
           <Button
+            variant="contained"
+            style={{backgroundColor:'steelblue'}}
             onClick={() => {
               setprogressDialog(false);
             }}
@@ -58,6 +60,8 @@ function EditProgress({
             Cancel
           </Button>
           <Button
+            variant="contained"
+            style={{backgroundColor:'steelblue'}}
             onClick={() => {
               updateProgress(id, updateValue);
               setprogressDialog(false);

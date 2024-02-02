@@ -2,8 +2,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Grid from "@mui/material/Grid";
 import { NavLink } from "react-router-dom";
 import Box from "@mui/material/Box";
@@ -15,15 +13,18 @@ import {createUserWithEmailAndPassword} from 'firebase/auth'
 import { Auth } from "../config/firebase";
 import {  useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Alert } from "@mui/material";
 
 const defaultTheme = createTheme();
 
 export default function SignUp() {
   const [loading,setLoading] = useState(false)
   const navigate = useNavigate();
+  const [error,seterror] = useState('')
 
   const handleSubmit =async (event) => {
     event.preventDefault();
+    seterror('')
     setLoading(true)
     const data = new FormData(event.currentTarget);
     const email = data.get("email");
@@ -32,6 +33,7 @@ export default function SignUp() {
     await createUserWithEmailAndPassword(Auth,email,password)
     .then(() => navigate('/'))
     }catch(err){
+      seterror(err.message)
       console.error(err.message);
     }
     setLoading(false)
@@ -67,6 +69,7 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
+          {error!=='' && <Alert severity="error" style={{marginTop:'10px',marginBottom:'10px'}}>{error}</Alert>}
           <Box
             component="form"
             noValidate
@@ -114,14 +117,6 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox value="allowExtraEmails" color="primary" />
-                  }
-                  label="I want to receive inspiration, marketing promotions and updates via email."
                 />
               </Grid>
             </Grid>

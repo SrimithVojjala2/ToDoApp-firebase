@@ -10,7 +10,7 @@ export const addToDo = async (taskValue, userId) => {
       const newUserDataDocRef = await addDoc(userDataCollectionRef, {
         description: taskValue,
         completed: false,
-        progress: 'Ongoing'
+        progress: 'Not yet'
       });
       document.getElementById("taskValue").value = "";
       return false;
