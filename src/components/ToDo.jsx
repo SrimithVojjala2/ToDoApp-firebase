@@ -1,4 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
@@ -16,7 +16,6 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MarkunreadIcon from "@mui/icons-material/Markunread";
 import MarkAsUnreadOutlinedIcon from "@mui/icons-material/MarkAsUnreadOutlined";
-import { useDispatch } from "react-redux";
 import { updateCheckBox } from "../redux/CRUD/EditValue";
 import DeleteDialog from "./DeleteDialog";
 import EditDialog from "./EditDialog";
@@ -30,7 +29,6 @@ function ToDo({ row, index }) {
   const [hoverPin, sethoverPin] = useState(false);
   const [progressDialog, setprogressDialog] = useState(false);
   const [pinValue, setpinValue] = useState(false);
-  const dispatch = useDispatch();
   const [checked, setChecked] = useState(false);
   useEffect(() => {
     setupdateEditvalue(row.description);

@@ -4,6 +4,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import { Auth } from "../config/firebase";
 
 const AuthRoute = () => {
+
   const [isUserAuthenticated, setIsUserAuthenticated] = useState(null);
 
   useEffect(() => {
@@ -22,7 +23,7 @@ const AuthRoute = () => {
     // Still waiting for the authentication state, you might want to render a loading spinner here
     return <div>Loading</div>;
   }
-
+   
   return isUserAuthenticated ? <Outlet /> : <Navigate to="/signin" />;
 };
 

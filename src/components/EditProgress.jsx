@@ -22,6 +22,7 @@ function EditProgress({
 
   useEffect(() => {
     setupdateValue(progressValue);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ ]);
 
   return (

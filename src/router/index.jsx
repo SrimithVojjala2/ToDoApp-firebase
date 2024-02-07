@@ -22,6 +22,7 @@ export default createBrowserRouter(
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
       </Route>
+      <Route to="*" element={<div>Not Found</div>}/>
     </>
   )
 );

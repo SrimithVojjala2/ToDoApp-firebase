@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+
 /* eslint-disable react-hooks/exhaustive-deps */
 import { collection, doc, onSnapshot } from "firebase/firestore";
 import { useEffect } from "react";
@@ -50,7 +50,7 @@ const MainBody = () => {
   return (
     <>
       <DragDropContext onDragEnd={(e) => {
-        dispatch(handleDragEnd(e),console.log(ToDos))
+        dispatch(handleDragEnd(e))
         }}>
         <TableContainer component={Paper} style={{ marginTop: "20px" }}>
           <Table aria-label="simple table">
