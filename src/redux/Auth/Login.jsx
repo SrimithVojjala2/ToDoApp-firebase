@@ -9,7 +9,7 @@ export const Login = async (data) => {
       return <Navigate to="/" />;
     });
   } catch (err) {
-    return err.message
+    return err.message;
   }
 };
 
@@ -18,9 +18,9 @@ export const signInWithGoogle =async () =>{
   try{
     await signInWithPopup(Auth,googleProvider)
     .then(() => {
-      return <Navigate to='/' />
-    })
+      return <Navigate to='/' />;
+    });
   }catch(err){
     console.error(err.message);
   }
-}
+};

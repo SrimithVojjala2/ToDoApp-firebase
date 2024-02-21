@@ -34,10 +34,10 @@ const ToDo = createSlice({
     },
     handleallselectvalue: (state,actions) =>{
       if(actions.payload !== false){
-        state.allselectvalue = !state.allselectvalue
+        state.allselectvalue = !state.allselectvalue;
       }
       else{
-        state.allselectvalue = actions.payload
+        state.allselectvalue = actions.payload;
       }
     }
   },

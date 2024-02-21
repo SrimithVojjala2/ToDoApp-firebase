@@ -1,5 +1,5 @@
 
-import { Outlet } from 'react-router-dom'
+import { Outlet } from 'react-router-dom';
 
 function Layout() {
   return (
@@ -8,7 +8,7 @@ function Layout() {
         <Outlet />
         <div>Footer</div>
     </>
-  )
+  );
 }
 
-export default Layout
+export default Layout;

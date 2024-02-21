@@ -17,17 +17,17 @@ const defaultTheme = createTheme();
 
 export default function SignIn() {
   const [disableButton, setdisableButton] = useState(false);
-  const [error,seterror] = useState('')
+  const [error,seterror] = useState('');
   const handleSubmit = async (event) => {
     event.preventDefault();
-    seterror('')
+    seterror('');
     setdisableButton(true);
     const data = new FormData(event.currentTarget);
     const email = data.get("email");
     const password = data.get("password");
     const response = await Login({ email, password });
     if(response !== undefined){
-      seterror(response)
+      seterror(response);
       console.error(response);
     }
     setdisableButton(false);

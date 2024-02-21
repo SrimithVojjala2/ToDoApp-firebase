@@ -17,23 +17,23 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import { addToDo } from "../redux/CRUD/addToDo";
 import { useSelector } from "react-redux";
-import {DeleteAll,DeleteSelected} from '../redux/CRUD/DeleteToDo'
+import {DeleteAll,DeleteSelected} from '../redux/CRUD/DeleteToDo';
 import { handleallselectvalue } from "../redux/ToDoApp/ToDoStore";
 import { useDispatch } from "react-redux";
 
 const UpperBody = () => {
   const [openAddToDo, setAddToDo] = useState(false);
-  const ToDos = useSelector(state => state.ToDoApp.ToDos)
+  const ToDos = useSelector(state => state.ToDoApp.ToDos);
   const [anchorEl, setanchorEl] = useState(null);
   const [openDeleteToDo, setDeleteToDo] = useState(false);
-  const allselectvalue = useSelector(state => state.ToDoApp.allselectvalue)
-  const dispatch = useDispatch()
+  const allselectvalue = useSelector(state => state.ToDoApp.allselectvalue);
+  const dispatch = useDispatch();
 
   const handleAddToDo = async () => {
     const taskValue = document.getElementById("taskValue").value;
     const userId = Auth.currentUser.uid;
-    await addToDo(taskValue,userId)
-    setAddToDo(false)
+    await addToDo(taskValue,userId);
+    setAddToDo(false);
   };
 
   const oneToDoCompleted = ToDos.some((ToDo) => ToDo.completed === true);
@@ -69,7 +69,7 @@ const UpperBody = () => {
           }}
           startIcon={<DeleteIcon />}
           onClick={() => {
-            setDeleteToDo(true)
+            setDeleteToDo(true);
           }}
         >
           Delete
@@ -151,13 +151,13 @@ const UpperBody = () => {
                 variant="contained"
                 onClick={() => {
                   if(allselectvalue){
-                    DeleteAll()
-                    dispatch(handleallselectvalue())
+                    DeleteAll();
+                    dispatch(handleallselectvalue());
                   }
                   else{
-                    DeleteSelected()
+                    DeleteSelected();
                   }
-                  setDeleteToDo(false)
+                  setDeleteToDo(false);
                 }}
               >
                 Delete

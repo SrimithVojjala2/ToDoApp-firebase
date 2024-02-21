@@ -1,18 +1,19 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
-    email: '',
-}
+  email: "",
+};
 
 // eslint-disable-next-line react-refresh/only-export-components
 const AuthStore = createSlice({
-  name: 'Auth',
+  name: "Auth",
   initialState,
   reducers: {
-    login: async () =>{
-      return null
-  }
-}});
+    login: async () => {
+      return null;
+    },
+  },
+});
 
-export const {login} = AuthStore.actions
+export const { login } = AuthStore.actions;
 
-export default AuthStore.reducer
+export default AuthStore.reducer;

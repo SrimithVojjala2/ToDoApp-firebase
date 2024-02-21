@@ -53,7 +53,7 @@ function EditDialog({openEditDialog,setopenEditDialog,id,updateEditvalue,setupda
                   </DialogActions>
                 </Dialog>
               </div>
-  )
+  );
 }
 
-export default EditDialog
+export default EditDialog;

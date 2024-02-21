@@ -37,15 +37,15 @@ function ToDo({ row, index }) {
 
   const activeProgress = () => {
     if(row.progress === 'Completed'){
-      return 'green'
+      return 'green';
     }
     if(row.progress === 'Not yet'){
-      return 'dimgrey'
+      return 'dimgrey';
     }
     if(row.progress === 'Ongoing'){
-      return 'red'
+      return 'red';
     }
-  }
+  };
 
 
 

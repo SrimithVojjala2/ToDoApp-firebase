@@ -9,7 +9,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import {createUserWithEmailAndPassword} from 'firebase/auth'
+import {createUserWithEmailAndPassword} from 'firebase/auth';
 import { Auth } from "../config/firebase";
 import {  useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -18,25 +18,25 @@ import { Alert } from "@mui/material";
 const defaultTheme = createTheme();
 
 export default function SignUp() {
-  const [loading,setLoading] = useState(false)
+  const [loading,setLoading] = useState(false);
   const navigate = useNavigate();
-  const [error,seterror] = useState('')
+  const [error,seterror] = useState('');
 
   const handleSubmit =async (event) => {
     event.preventDefault();
-    seterror('')
-    setLoading(true)
+    seterror('');
+    setLoading(true);
     const data = new FormData(event.currentTarget);
     const email = data.get("email");
     const password = data.get("password");
     try{
     await createUserWithEmailAndPassword(Auth,email,password)
-    .then(() => navigate('/'))
+    .then(() => navigate('/'));
     }catch(err){
-      seterror(err.message)
+      seterror(err.message);
       console.error(err.message);
     }
-    setLoading(false)
+    setLoading(false);
   };
 
   const styles ={

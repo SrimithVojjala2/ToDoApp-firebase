@@ -18,12 +18,12 @@ import {
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { useSelector } from "react-redux";
 import ToDo from "./ToDo";
-import {UpdateAllcheckbox} from '../redux/CRUD/EditValue'
+import {UpdateAllcheckbox} from '../redux/CRUD/EditValue';
 import { handleDragEnd,handleallselectvalue } from "../redux/ToDoApp/ToDoStore";
 
 const MainBody = () => {
   const ToDos = useSelector(state => state.ToDoApp.ToDos);
-  const allselectvalue = useSelector(state => state.ToDoApp.allselectvalue)
+  const allselectvalue = useSelector(state => state.ToDoApp.allselectvalue);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const MainBody = () => {
   return (
     <>
       <DragDropContext onDragEnd={(e) => {
-        dispatch(handleDragEnd(e))
+        dispatch(handleDragEnd(e));
         }}>
         <TableContainer component={Paper} style={{ marginTop: "20px" }}>
           <Table aria-label="simple table">
@@ -66,8 +66,8 @@ const MainBody = () => {
                 >
                   <Checkbox
                     onChange={() => {
-                      dispatch(handleallselectvalue())
-                      UpdateAllcheckbox(!allselectvalue)
+                      dispatch(handleallselectvalue());
+                      UpdateAllcheckbox(!allselectvalue);
                     }}
                     checked={allselectvalue}
                     style={{
